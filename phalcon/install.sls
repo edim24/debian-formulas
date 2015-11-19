@@ -1,3 +1,5 @@
+{% from "phalcon/map.jinja" import phalcon with context %}
+
 https://github.com/phalcon/cphalcon.git:
   git.latest:
     - target: /usr/local/src/phalcon
