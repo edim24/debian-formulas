@@ -1,5 +1,7 @@
 {% from "phalcon/map.jinja" import phalcon with context %}
 
+{% if 1 == salt['cmd.retcode']('test -f /srv/locks/phalcon.' + phalcon.version +'.lock') %}
+
 https://github.com/phalcon/cphalcon.git:
   git.latest:
     - target: /usr/local/src/phalcon
@@ -38,3 +40,5 @@ phalcon-lock-file:
     - makedirs: true
     - require:
       - cmd: phalcon-mod-enable
+
+{% endif %}
