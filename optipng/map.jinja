@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{## Start with  defaults from defaults.sls ##}
+{% import_yaml 'optipng/config.yaml' as default_settings %}
+
+{## Merge in optipng pillar ##}
+{% set optipng = salt['pillar.get'](
+        'optipng',
+        default=default_settings.optipng,
+        merge=True
+    )
+%}
