@@ -3,7 +3,7 @@
 {% if 1 == salt['cmd.retcode']('test -f /srv/locks/rabbitmq.' + rabbitmq.version +'.lock') %}
 
 rabbitmq-wget:
-  pkg.installed
+  pkg.installed:
     - name: wget
 
 /usr/local/src/rabbitmq:
