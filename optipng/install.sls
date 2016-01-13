@@ -9,7 +9,7 @@
 
 optipng-source:
   cmd.run:
-    - name: wget http://downloads.sourceforge.net/project/optipng/OptiPNG/{{ optipng.version }}/{{ optipng.version }}.tar.gz
+    - name: wget http://downloads.sourceforge.net/project/optipng/OptiPNG/optipng-{{ optipng.version }}/optipng-{{ optipng.version }}.tar.gz
     - cwd: /usr/local/src/optipng/
     - require:
       - pkg: dev-apps
