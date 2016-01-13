@@ -1,3 +1,5 @@
+{% from "mongodb/map.jinja" import mongodb with context %}
+
 mongodb-repo:
   pkgrepo.managed:
     - name: deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen
