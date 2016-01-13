@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
 optipng:
-  version: optipng-0.7.5
+  version: 0.7.5
