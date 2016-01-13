@@ -23,7 +23,7 @@ nodejs:
 npm-modules:
   npm:
     - installed
-    - names: {{ npm.modules }}
+    - names: {{ npm.global_modules }}
     - runas: root
     - require:
       - pkg: nodejs
