@@ -17,7 +17,7 @@ optipng-source:
 
 optipng-untar:
   cmd.run:
-    - name: tar xvf {{ optipng.version }}.tar.gz
+    - name: tar xvf optipng-{{ optipng.version }}.tar.gz
     - cwd: /usr/local/src/optipng/
     - require:
       - cmd: optipng-source
@@ -25,21 +25,21 @@ optipng-untar:
 optipng-configure:
   cmd.run:
     - name: ./configure
-    - cwd: /usr/local/src/optipng/{{ optipng.version }}/
+    - cwd: /usr/local/src/optipng/optipng-{{ optipng.version }}/
     - require:
       - cmd: optipng-untar
 
 optipng-make:
   cmd.run:
     - name: make
-    - cwd: /usr/local/src/optipng/{{ optipng.version }}/
+    - cwd: /usr/local/src/optipng/optipng-{{ optipng.version }}/
     - require:
       - cmd: optipng-configure
 
 optipng-checkinstall:
   cmd.run:
     - name: sudo checkinstall -y
-    - cwd: /usr/local/src/optipng/{{ optipng.version }}/
+    - cwd: /usr/local/src/optipng/optipng-{{ optipng.version }}/
     - require:
       - cmd: optipng-make
 
