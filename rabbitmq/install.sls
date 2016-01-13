@@ -58,4 +58,5 @@ rabbitmq-server:
   service.running:
     - require:
       - cmd: rabbitmq-make-install
+
 {% endif %}
