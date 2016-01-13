@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{## Start with  defaults from defaults.sls ##}
+{% import_yaml 'capistrano/defaults.yaml' as default_settings %}
+
+{## Merge in capistrano pillar ##}
+{% set capistrano = salt['pillar.get'](
+        'capistrano',
+        default=default_settings.capistrano,
+        merge=True
+    )
+%}
