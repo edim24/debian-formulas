@@ -31,12 +31,12 @@ rabbitmq-lock-file:
     - name: /srv/locks/rabbitmq.{{ rabbitmq.version }}.lock
     - makedirs: true
     - require:
-      - cmd: rabbitmq-install
+      - pkg: rabbitmq-install
 
 rabbitmq-server:
   service.running:
     - require:
-      - cmd: rabbitmq-install
+      - pkg: rabbitmq-install
 
 {% else %}
 
