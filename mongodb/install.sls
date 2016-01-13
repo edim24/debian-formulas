@@ -10,10 +10,10 @@ mongodb-repo:
   file.managed:
     - user: root
     - group: root
-    - contents: |
-      LANG="en_US.UTF-8"
-      LANGUAGE="en_US:en"
-      LC_ALL="en_US.UTF-8"
+    - contents:
+      - LANG="en_US.UTF-8"
+      - LANGUAGE="en_US:en"
+      - LC_ALL="en_US.UTF-8"
 
 mongodb-all:
   pkg.installed:
