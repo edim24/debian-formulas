@@ -1,0 +1,7 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+npm:
+  modules:
+    - grunt-cli
+    - bower
+    - uglify-js
