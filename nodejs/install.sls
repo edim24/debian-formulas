@@ -1,4 +1,4 @@
-{% from "nodejs/map.jinja" import capistrano with context %}
+{% from "nodejs/map.jinja" import npm with context %}
 
 {% if 1 == salt['cmd.retcode']('test -f /srv/locks/nodesource.lock') %}
 
