@@ -26,19 +26,12 @@ rabbitmq-untar:
     - require:
       - cmd: rabbitmq-source
 
-rabbitmq-configure:
-  cmd.run:
-    - name: ./configure
-    - cwd: /usr/local/src/rabbitmq/rabbitmq-server-{{ rabbitmq.version }}/
-    - require:
-      - cmd: rabbitmq-untar
-
 rabbitmq-make:
   cmd.run:
     - name: make
     - cwd: /usr/local/src/rabbitmq/rabbitmq-server-{{ rabbitmq.version }}/
     - require:
-      - cmd: rabbitmq-configure
+      - cmd: rabbitmq-untar
 
 rabbitmq-make-install:
   cmd.run:
