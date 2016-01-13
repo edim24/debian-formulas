@@ -6,13 +6,16 @@ mongodb-repo:
 
 /etc/default/locale:
   file.managed:
-    - source: salt://files/locale
     - user: root
     - group: root
+    - contents: |
+      LANG="en_US.UTF-8"
+      LANGUAGE="en_US:en"
+      LC_ALL="en_US.UTF-8"
 
 mongodb-all:
   pkg.installed:
-    - version: {{ pillar['mongodb_version'] }}
+    - version: {{ mongodb.version }}
     - require:
       - pkgrepo: mongodb-repo
       - file: /etc/default/locale
