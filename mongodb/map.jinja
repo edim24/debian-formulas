@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{## Start with  defaults from defaults.sls ##}
+{% import_yaml 'mongodb/config.yaml' as default_settings %}
+
+{## Merge in mongodb pillar ##}
+{% set mongodb = salt['pillar.get'](
+        'mongodb',
+        default=default_settings.mongodb,
+        merge=True
+    )
+%}
