@@ -1,3 +1,5 @@
+{% from "nodejs/map.jinja" import capistrano with context %}
+
 {% if 1 == salt['cmd.retcode']('test -f /srv/locks/nodesource.lock') %}
 
 add-nodejs-repo:
@@ -21,10 +23,7 @@ nodejs:
 npm-modules:
   npm:
     - installed
-    - names:
-      - grunt-cli
-      - bower
-      - uglify-js
+    - names: {{ npm.modules }}
     - runas: root
     - require:
       - pkg: nodejs
