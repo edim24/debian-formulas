@@ -1,0 +1,4 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+capistrano:
+  version: 2.15.5
