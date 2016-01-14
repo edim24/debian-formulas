@@ -2,7 +2,5 @@
 # vim: ft=yaml
 php55:
   extentions:
-      - php5-cli
-      - php5-fpm
       - php5-dev
       - php5-curl

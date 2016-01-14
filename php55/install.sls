@@ -8,8 +8,10 @@ php55-dotdeb:
 
 php55:
   pkg.installed:
-    - name: php5
-    - refresh: True
+    - pkgs:
+      - php5-cli
+      - php5-common
+      - php5-fpm
     - require:
       - pkgrepo: php55-dotdeb
 
