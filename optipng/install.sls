@@ -2,6 +2,11 @@
 
 {% if 1 == salt['cmd.retcode']('test -f /srv/locks/optipng.' + optipng.version +'.lock') %}
 
+optipng-libs:
+  pkg.installed:
+    - pkgs:
+      - checkinstall
+
 /usr/local/src/optipng:
   file.directory:
     - makedirs: True
@@ -41,6 +46,7 @@ optipng-checkinstall:
     - cwd: /usr/local/src/optipng/optipng-{{ optipng.version }}/
     - require:
       - cmd: optipng-make
+      - pkg: optipng-libs
 
 optipng-lock-file:
   file.touch:
