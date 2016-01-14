@@ -10,8 +10,6 @@ https://github.com/phalcon/cphalcon.git:
     - target: /usr/local/src/phalcon
     - rev: {{ phalcon.version }}
     - depth: 1
-    - require:
-      - pkg: dev-apps
 
 phalcon-build:
   cmd.run:
