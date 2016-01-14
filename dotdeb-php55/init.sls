@@ -4,6 +4,6 @@
 {% if grains['os_family'] == 'Debian' %}
 
 include:
-  - dotdeb.install
+  - dotdeb-php55.install
 
 {% endif %}

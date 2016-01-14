@@ -1,4 +1,4 @@
-php-dotdeb:
+dotdeb-php55:
   pkgrepo.managed:
     - name: deb http://packages.dotdeb.org wheezy-php55 all
     - file: /etc/apt/sources.list
