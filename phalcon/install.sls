@@ -12,6 +12,8 @@ https://github.com/phalcon/cphalcon.git:
     - depth: 1
     - require:
       - pkg: dev-apps
+      - pkg: php55
+      - service: php55-fpm-service
 
 phalcon-build:
   cmd.run:
@@ -34,8 +36,6 @@ phalcon-mod-enable:
     - onlyif: type php5enmod
     - require:
       - file: /etc/php5/mods-available/phalcon.ini
-      - pkg: php55
-      - service: php55-fpm-service
 
 phalcon-lock-file:
   file.touch:
