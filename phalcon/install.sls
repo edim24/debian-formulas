@@ -11,12 +11,18 @@ https://github.com/phalcon/cphalcon.git:
     - rev: {{ phalcon.version }}
     - depth: 1
 
+phalcon-libs:
+  pkg.installed:
+    - pkgs:
+      - libpcre3-dev
+
 phalcon-build:
   cmd.run:
     - name: ./install
     - cwd: /usr/local/src/phalcon/ext/
     - require:
       - git: https://github.com/phalcon/cphalcon.git
+      - pkg: phalcon-libs
       - pkg: php55
       - service: php55-fpm-service
 
