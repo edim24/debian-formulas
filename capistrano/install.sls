@@ -3,6 +3,8 @@
 
 {% from "capistrano/map.jinja" import capistrano with context %}
 
+{% if 1 == salt['cmd.retcode']('test -f /srv/locks/capistrano.' + capistrano.version +'.lock') %}
+
 ruby:
   pkg.installed:
     - name: ruby1.9.3
@@ -25,3 +27,12 @@ capistrano:
     - version : {{ capistrano.version }}
     - require:
       - gem: net-ssh
+
+capistrano-lock-file:
+  file.touch:
+    - name: /srv/locks/capistrano.{{ capistrano.version }}.lock
+    - makedirs: true
+    - require:
+      - gem: capistrano
+
+{% endif %}
