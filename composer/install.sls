@@ -12,7 +12,7 @@ composer-get:
     - cwd: /root/
     - require:
       - pkg: composer-curl
-      - sls: php55
+      - pkg: php55
 
 composer-setup:
   cmd.wait:
