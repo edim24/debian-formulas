@@ -1,3 +1,6 @@
+include:
+  - php55
+
 composer-curl:
   pkg.installed:
     - name: curl
