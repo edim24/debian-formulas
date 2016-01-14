@@ -11,7 +11,7 @@ composer-get:
       - pkg: composer-curl
       - sls: php55
 
-composer-install:
+composer-setup:
   cmd.wait:
     - name: mv /root/composer.phar /usr/local/bin/composer
     - cwd: /root/
