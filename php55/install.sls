@@ -27,7 +27,7 @@ php55-www-conf:
     - require:
       - pkg: php55
 
-php55-fpm:
+php55-fpm-service:
   service.running:
     - name: php5-fpm
     - watch:
