@@ -2,6 +2,9 @@
 
 {% if 1 == salt['cmd.retcode']('test -f /srv/locks/phalcon.' + phalcon.version +'.lock') %}
 
+include:
+  - php55
+
 https://github.com/phalcon/cphalcon.git:
   git.latest:
     - target: /usr/local/src/phalcon
@@ -27,12 +30,12 @@ phalcon-build:
 
 phalcon-mod-enable:
   cmd.run:
-    - name: php5enmod phalcon && service php5-fpm restart && service nginx restart
+    - name: php5enmod phalcon && service php5-fpm restart
     - onlyif: type php5enmod
     - require:
       - file: /etc/php5/mods-available/phalcon.ini
       - pkg: php55
-      - pkg: nginx
+      - service: php55-fpm-service
 
 phalcon-lock-file:
   file.touch:
