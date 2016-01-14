@@ -19,7 +19,7 @@ phalcon-build:
     - cwd: /usr/local/src/phalcon/ext/
     - require:
       - git: https://github.com/phalcon/cphalcon.git
-      - pkg: php55-extentions
+      - pkg: php55
       - service: php55-fpm-service
 
 /etc/php5/mods-available/phalcon.ini:

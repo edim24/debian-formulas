@@ -9,8 +9,10 @@ php55-dotdeb:
 php55:
   pkg.installed:
     - pkgs:
+      - php5-common
       - php5-cli
       - php5-fpm
+      - php5-dev
     - require:
       - pkgrepo: php55-dotdeb
 
