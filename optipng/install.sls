@@ -12,7 +12,6 @@ optipng-source:
     - name: wget http://downloads.sourceforge.net/project/optipng/OptiPNG/optipng-{{ optipng.version }}/optipng-{{ optipng.version }}.tar.gz
     - cwd: /usr/local/src/optipng/
     - require:
-      - pkg: dev-apps
       - file: /usr/local/src/optipng
 
 optipng-untar:
