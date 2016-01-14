@@ -1,10 +1,16 @@
 {% from "php55/map.jinja" import php55 with context %}
 
+php55-dotdeb:
+  pkgrepo.managed:
+    - name: deb http://packages.dotdeb.org wheezy-php55 all
+    - file: /etc/apt/sources.list
+    - key_url: http://www.dotdeb.org/dotdeb.gpg
+
 php55:
   pkg.installed:
-    - name: php5 
+    - name: php5
     - require:
-      - sls: dotdeb-php55
+      - pkgrepo: php55-dotdeb
 
 php55-extentions:
   pkg.installed:
