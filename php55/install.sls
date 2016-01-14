@@ -10,7 +10,6 @@ php55:
   pkg.installed:
     - pkgs:
       - php5-cli
-      - php5-common
       - php5-fpm
     - require:
       - pkgrepo: php55-dotdeb
@@ -34,6 +33,7 @@ php55-fpm-service:
   service.running:
     - name: php5-fpm
     - watch:
+      - pkg: php55-extentions
       - file: php55-www-conf
     - require:
       - pkg: php55
