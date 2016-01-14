@@ -2,9 +2,14 @@
 
 {% if 1 == salt['cmd.retcode']('test -f /srv/locks/nodesource.lock') %}
 
+include:
+  - curl
+
 add-nodejs-repo:
   cmd.run:
     - name: 'curl -sL https://deb.nodesource.com/setup | bash -'
+    - require:
+      - pkg: curl
 
 nodejs-lock-file:
   file.touch:

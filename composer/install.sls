@@ -1,9 +1,6 @@
 include:
   - php55
-
-composer-curl:
-  pkg.installed:
-    - name: curl
+  - curl
 
 composer-get:
   cmd.run:
@@ -11,7 +8,7 @@ composer-get:
     - unless: test -f /usr/local/bin/composer
     - cwd: /root/
     - require:
-      - pkg: composer-curl
+      - pkg: curl
       - pkg: php55
 
 composer-setup:
