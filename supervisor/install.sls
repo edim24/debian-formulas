@@ -1,3 +1,7 @@
+{% from "capistrano/map.jinja" import environment with context %}
+{% from "capistrano/map.jinja" import app_dir with context %}
+{% from "capistrano/map.jinja" import capistrano with context %}
+
 supervisor:
   pkg:
     - installed
