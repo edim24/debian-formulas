@@ -1,7 +1,5 @@
 {% from "wkhtmltopdf/map.jinja" import wkhtmltopdf with context %}
 
-{% if 1 == salt['cmd.retcode']('test -f /srv/locks/' + wkhtmltopdf.deb +'.lock') %}
-
 wkhtmltopdf-fonts:
   pkg.installed:
     - pkgs:
@@ -16,6 +14,7 @@ wkhtmltopdf-fonts:
 wkhtmltopdf-source:
   cmd.run:
     - name: wget {{ wkhtmltopdf.path }}{{ wkhtmltopdf.deb }}
+    - unless: test -f {{ pillar['wkhtmltopdf']['deb'] }}
     - cwd: /usr/local/src/wkhtmltopdf
     - require:
       - file: /usr/local/src/wkhtmltopdf
@@ -23,6 +22,7 @@ wkhtmltopdf-source:
 wkhtmltopdf-install:
   cmd.run:
     - name: sudo dpkg -i {{ wkhtmltopdf.deb }}
+    - unless: which wkhtmltopdf
     - cwd: /usr/local/src/wkhtmltopdf
     - require:
       - cmd: wkhtmltopdf-source
@@ -42,5 +42,3 @@ wkhtmltopdf-install:
 /usr/local/share/fonts/TrebuchetMSBoldItalic.ttf:
   file.managed:
     - source: salt://files/fonts/TrebuchetMSBoldItalic.ttf
-
-{% endif %}
