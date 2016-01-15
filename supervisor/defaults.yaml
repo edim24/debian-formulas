@@ -1,0 +1,15 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+
+# Environment: prod or local
+environment: local
+# Full path to application dir
+app_dir: /vagrant/
+# Workers list
+supervisor:
+  workers: {}
+#    example_worker:
+#      command: /usr/bin/php ./app/cli.php example run
+#      numprocs:
+#        local: 2
+#        prod: 10

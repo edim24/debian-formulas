@@ -1,0 +1,29 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{## Start with  defaults from defaults.sls ##}
+{% import_yaml 'supervisor/defaults.yaml' as default_settings %}
+
+{## Get environment from pillar ##}
+{% set environment = salt['pillar.get'](
+        'environment',
+        default=default_settings.environment,
+        merge=False
+    )
+%}
+
+{## Get application dir from pillar ##}
+{% set app_dir = salt['pillar.get'](
+        'app_dir',
+        default=default_settings.app_dir,
+        merge=False
+    )
+%}
+
+{## Get workers list from pillar ##}
+{% set supervisor = salt['pillar.get'](
+        'supervisor',
+        default=default_settings.supervisor,
+        merge=False
+    )
+%}
