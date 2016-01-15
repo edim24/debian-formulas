@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{## Start with  defaults from defaults.sls ##}
+{% import_yaml 'timezone/defaults.yaml' as default_settings %}
+
+{## Merge in timezone pillar ##}
+{% set timezone = salt['pillar.get'](
+        'timezone',
+        default=default_settings.timezone,
+        merge=True
+    )
+%}
