@@ -1,0 +1,9 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+
+# Crons list
+crontab: {}
+#  root:
+#    - '*/30 * * * * first command'
+#  www-data:
+#    - '* * * * * second command'

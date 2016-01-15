@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{## Start with  defaults from defaults.sls ##}
+{% import_yaml 'crontab/defaults.yaml' as default_settings %}
+
+{## Merge in crontab pillar ##}
+{% set crontab = salt['pillar.get'](
+        'crontab',
+        default=default_settings.crontab,
+        merge=False
+    )
+%}
