@@ -17,7 +17,7 @@ wkhtmltopdf-source:
   cmd.run:
     - name: wget {{ wkhtmltopdf.path }}{{ wkhtmltopdf.deb }}
     - cwd: /usr/local/src/wkhtmltopdf
-    - require_in:
+    - require:
       - file: /usr/local/src/wkhtmltopdf
 
 wkhtmltopdf-install:
