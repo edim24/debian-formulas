@@ -3,7 +3,7 @@
 
 {% from "crontab/map.jinja" import crontab with context %}
 
-{% for user, crons in crontab %}
+{% for user in crontab %}
 
 crontab-{{ user }}:
   cron.file:
@@ -11,7 +11,7 @@ crontab-{{ user }}:
     - user: {{ user }}
     - template: jinja
     - context:
-        crons: |{% for cron in crons %}
+        crons: |{% for cron in crontab.get(user, []) %}
           {{ cron }}{% endfor %}
 
 {% endfor %}
