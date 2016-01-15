@@ -30,7 +30,7 @@ phalcon-build:
   file.managed:
     - user: root
     - group: root
-    - source: salt://files/phalcon.ini
+    - source: salt://phalcon/phalcon.ini
     - require:
       - cmd: phalcon-build
 
