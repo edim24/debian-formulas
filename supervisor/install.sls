@@ -1,6 +1,6 @@
-{% from "capistrano/map.jinja" import environment with context %}
-{% from "capistrano/map.jinja" import app_dir with context %}
-{% from "capistrano/map.jinja" import capistrano with context %}
+{% from "supervisor/map.jinja" import environment with context %}
+{% from "supervisor/map.jinja" import app_dir with context %}
+{% from "supervisor/map.jinja" import supervisor with context %}
 
 supervisor:
   pkg:
