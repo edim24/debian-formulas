@@ -13,7 +13,7 @@ gearman-job-server-packages:
       - uuid-dev
       - gearman-tools
     - require:
-	  - pkg: php55
+      - pkg: php55
 
 /usr/local/src/gearman-job-server:
   file.directory:
