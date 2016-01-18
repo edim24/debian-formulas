@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{## Start with defaults from defaults.yaml ##}
+{% import_yaml 'mysql_server/defaults.yaml' as default_settings %}
+
+{## Get MySQL server init settings from pillar ##}
+{% set mysql_server = salt['pillar.get'](
+        'mysql_server',
+        default=default_settings.mysql_server,
+        merge=False
+    )
+%}
