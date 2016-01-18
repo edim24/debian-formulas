@@ -1,0 +1,9 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+
+# Allow some users to run commands without a password in format:
+# <username>: '<command1>, <command2>, ...'
+# Don't touch unless you know what you're doing!
+sudoers:
+  commands: {}
+#    www-data: '/etc/init.d/php5-fpm restart'
