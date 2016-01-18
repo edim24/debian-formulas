@@ -14,6 +14,18 @@ supervisor:
   file.directory:
     - clean: True
 
+
+{% if environment == 'local' %}
+
+/etc/init/supervisor.conf:
+  file.managed:
+    - source: salt://supervisor/supervisor.conf
+    - user: root
+    - group: root
+    - mode: 644
+
+{% endif %}
+
 {% for worker, params in supervisor.get('workers', {}).items() %}
 /etc/supervisor/conf.d/{{ worker }}.conf:
   file.managed:
