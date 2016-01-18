@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{## Start with defaults from defaults.yaml ##}
+{% import_yaml 'gearman/defaults.yaml' as default_settings %}
+
+{## Merge in gearman pillar ##}
+{% set gearman = salt['pillar.get'](
+        'gearman',
+        default=default_settings.gearman,
+        merge=False
+    )
+%}
