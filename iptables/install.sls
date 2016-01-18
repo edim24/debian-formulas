@@ -53,7 +53,7 @@ iptables_allow_port_{{ port }}:
     - require:
       - pkg: iptables_packages
     - require_in:
-      - iptables: enable_reject_policy
+      - iptables: iptables_enable_reject_policy
 {% endfor %}
 
 iptables_enable_reject_policy:
