@@ -68,6 +68,8 @@ gearman-job-server-make-install:
     - user: root
     - group: root
     - mode: 755
+    - require:
+      - file: /var/log/gearman-job-server
 
 /etc/init.d/gearman-job-server:
   file.managed:
