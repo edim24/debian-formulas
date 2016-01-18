@@ -1,0 +1,12 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+
+iptables:
+  # Allow all connections from this list of ip-addresses
+  allowed_addresses:
+    - 127.0.0.1
+  # Allow connections only to this list of ports for other ip-addresses
+  allowed_ports:
+    - 22
+    - 80
+    - 443

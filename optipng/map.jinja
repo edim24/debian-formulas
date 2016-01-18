@@ -8,6 +8,6 @@
 {% set optipng = salt['pillar.get'](
         'optipng',
         default=default_settings.optipng,
-        merge=True
+        merge=False
     )
 %}

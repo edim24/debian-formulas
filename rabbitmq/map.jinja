@@ -8,6 +8,6 @@
 {% set rabbitmq = salt['pillar.get'](
         'rabbitmq',
         default=default_settings.rabbitmq,
-        merge=True
+        merge=False
     )
 %}

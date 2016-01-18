@@ -8,6 +8,6 @@
 {% set timezone = salt['pillar.get'](
         'timezone',
         default=default_settings.timezone,
-        merge=True
+        merge=False
     )
 %}

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
+
 php55:
   extentions:
-      - php5-dev
-      - php5-curl
+    - php5-curl

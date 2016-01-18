@@ -8,6 +8,6 @@
 {% set wkhtmltopdf = salt['pillar.get'](
         'wkhtmltopdf',
         default=default_settings.wkhtmltopdf,
-        merge=True
+        merge=False
     )
 %}

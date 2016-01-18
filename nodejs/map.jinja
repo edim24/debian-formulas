@@ -8,6 +8,6 @@
 {% set npm = salt['pillar.get'](
         'npm',
         default=default_settings.npm,
-        merge=True
+        merge=False
     )
 %}

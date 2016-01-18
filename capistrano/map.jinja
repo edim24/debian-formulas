@@ -8,6 +8,6 @@
 {% set capistrano = salt['pillar.get'](
         'capistrano',
         default=default_settings.capistrano,
-        merge=True
+        merge=False
     )
 %}

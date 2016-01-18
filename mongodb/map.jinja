@@ -8,6 +8,6 @@
 {% set mongodb = salt['pillar.get'](
         'mongodb',
         default=default_settings.mongodb,
-        merge=True
+        merge=False
     )
 %}
