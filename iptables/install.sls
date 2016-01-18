@@ -17,7 +17,7 @@ iptables_allow_address_{{ address }}:
     - require:
       - pkg: iptables_packages
     - require_in:
-      - iptables: enable_reject_policy
+      - iptables: iptables_enable_reject_policy
 {% endfor %}
 
 iptables_allow_icmp:
