@@ -3,3 +3,7 @@
 
 rabbitmq:
   version: 3.5.7
+  users: []
+#  users:
+#    - {name: user_1, password: password_1}
+#    - {name: user_2, password: password_2}

@@ -25,6 +25,8 @@ rabbitmq-install:
       - rabbitmq-server: /usr/local/src/rabbitmq/rabbitmq-server_{{ rabbitmq.version }}-1_all.deb
     - require:
       - cmd: rabbitmq-source
+    - require_in:
+      - service: rabbitmq-server
 
 rabbitmq-lock-file:
   file.touch:
@@ -33,14 +35,23 @@ rabbitmq-lock-file:
     - require:
       - pkg: rabbitmq-install
 
-rabbitmq-server:
-  service.running:
-    - require:
-      - pkg: rabbitmq-install
-
-{% else %}
+{% endif %}
 
 rabbitmq-server:
   service.running
 
-{% endif %}
+{% for index in rabbitmq.users %}
+
+rabbitmq-user-{{ rabbitmq.users[index].name }}:
+  rabbitmq_user.present:
+    - name: {{ rabbitmq.users[index].name }}
+    - password: {{ rabbitmq.users[index].password }}
+    - force: True
+    - perms:
+      - '/':
+        - '.*'
+        - '.*'
+        - '.*'
+    - runas: rabbitmq
+
+{% endfor %}
