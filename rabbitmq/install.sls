@@ -52,5 +52,6 @@ rabbitmq-user-{{ user.name }}:
         - '.*'
         - '.*'
         - '.*'
+    - runas: root
 
 {% endfor %}
