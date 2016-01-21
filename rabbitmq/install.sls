@@ -40,12 +40,12 @@ rabbitmq-lock-file:
 rabbitmq-server:
   service.running
 
-{% for index in rabbitmq.users %}
+{% for user in rabbitmq.users %}
 
-rabbitmq-user-{{ rabbitmq.users[index].name }}:
+rabbitmq-user-{{ user.name }}:
   rabbitmq_user.present:
-    - name: {{ rabbitmq.users[index].name }}
-    - password: {{ rabbitmq.users[index].password }}
+    - name: {{ user.name }}
+    - password: {{ user.password }}
     - force: True
     - perms:
       - '/':
