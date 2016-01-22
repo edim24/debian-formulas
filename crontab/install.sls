@@ -11,7 +11,9 @@ crontab-{{ user }}:
     - user: {{ user }}
     - template: jinja
     - context:
-        crons: |{% for cron in crontab.get(user, []) %}
-          {{ cron }}{% endfor %}
+        crons: |
+          {% for cron in crontab.get(user, []) -%}
+          {{ cron }}
+          {% endfor %}
 
 {% endfor %}
