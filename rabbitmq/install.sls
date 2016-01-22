@@ -53,5 +53,7 @@ rabbitmq-user-{{ user.name }}:
         - '.*'
         - '.*'
     - runas: root
+    - require:
+      - service: rabbitmq-server
 
 {% endfor %}
