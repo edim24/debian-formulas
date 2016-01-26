@@ -3,12 +3,14 @@
 
 {% from "memcached/map.jinja" import memcached with context %}
 
-{% if not memcached.server.installed %}
+{% if memcached.server.installed == True %}
 
 memcached:
   pkg.installed
+
+memcached-service:
   service.running:
-    - enable: True
+    - name: memcached
     - require:
       - pkg: memcached
 
@@ -24,11 +26,11 @@ memcached:
     - require:
       - pkg: memcached
     - watch_in:
-      - service: memcached
+      - service: memcached-service
 
 {% endif %}
 
-{% if memcached.client.installed %}
+{% if memcached.client.installed == True %}
 
 include:
   - php55
