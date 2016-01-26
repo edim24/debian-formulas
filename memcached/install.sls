@@ -18,7 +18,7 @@ memcached-service:
   file.managed:
     - source: salt://memcached/memcached.conf
     - context:
-      listen: {{ memcached.server.listen }}
+      listen_addr: {{ memcached.server.listen_addr }}
     - template: jinja
     - user: root
     - group: root
