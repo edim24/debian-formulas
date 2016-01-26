@@ -5,5 +5,5 @@ rabbitmq:
   version: 3.5.7
   users: []
 #  users:
-#    - {name: user_1, password: password_1}
-#    - {name: user_2, password: password_2}
+#    - {name: user_1, password: password_1, permissions: {vhostpath: /, conf: .*, write: .*, read: .*}}
+#    - {name: user_2, password: password_2, permissions: {vhostpath: /, conf: .*, write: .*, read: .*}}

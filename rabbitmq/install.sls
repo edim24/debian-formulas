@@ -78,4 +78,17 @@ rabbitmq-change-password-{{ user.name }}:
       - cmd: rabbitmq-add-user-{{ user.name }}
       - service: rabbitmq-server
 
+{% if user.get('permissions', False) %}
+
+rabbitmq-set-permissions-{{ user.name }}:
+  cmd.run:
+    - name: /usr/sbin/rabbitmqctl set_permissions -p {{ user.permissions.get('vhostpath', '/') }} {{ user.name }} "{{ user.permissions.get('conf', '.*') }}" "{{ user.permissions.get('write', '.*') }}" "{{ user.permissions.get('read', '.*') }}"
+    - unless: /usr/sbin/rabbitmqctl list_user_permissions -q {{ user.name }} | grep -qi "^{{ user.permissions.get('vhostpath', '/') }}\s{{ user.permissions.get('conf', '.*') }}\s{{ user.permissions.get('write', '.*') }}\s{{ user.permissions.get('read', '.*') }}$"
+    - runas: root
+    - require:
+      - cmd: rabbitmq-add-user-{{ user.name }}
+      - service: rabbitmq-server
+
+{% endif %}
+
 {% endfor %}
