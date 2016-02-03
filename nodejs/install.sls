@@ -21,9 +21,7 @@ nodejs-lock-file:
 {% endif %}
 
 nodejs:
-  pkg.installed:
-    - pkgs:
-      - nodejs
+  pkg.installed
 
 npm-modules:
   npm:
