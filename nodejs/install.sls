@@ -10,6 +10,8 @@ add-nodejs-repo:
     - name: 'curl -sL https://deb.nodesource.com/setup | bash -'
     - require:
       - pkg: curl
+    - require_in:
+      - pkg: nodejs
 
 nodejs-lock-file:
   file.touch:
