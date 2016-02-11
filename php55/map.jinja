@@ -8,6 +8,6 @@
 {% set php55 = salt['pillar.get'](
         'php55',
         default=default_settings.php55,
-        merge=False
+        merge=True
     )
 %}

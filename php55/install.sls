@@ -39,3 +39,16 @@ php55-fpm-service:
       - file: php55-www-conf
     - require:
       - pkg: php55
+
+{% if php55.get('enable_short_open_tag', False) %}
+
+php55-enable-short-tag:
+  file.replace:
+    - name: /etc/php5/fpm/php.ini
+    - pattern: short_open_tag = Off
+    - repl: short_open_tag = On
+    - flags: ['IGNORECASE']
+    - append_if_not_found: True
+    - backup: False
+
+{% endif %}

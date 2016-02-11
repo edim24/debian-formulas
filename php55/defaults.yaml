@@ -2,5 +2,6 @@
 # vim: ft=yaml
 
 php55:
+  enable_short_open_tag: False
   extentions:
     - php5-curl
