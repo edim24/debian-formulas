@@ -42,7 +42,7 @@ php55-fpm-service:
 
 {% if php55.get('enable_short_open_tag', False) %}
 
-php55-enable-short-tag:
+php55-fpm-enable-short-tag:
   file.replace:
     - name: /etc/php5/fpm/php.ini
     - pattern: short_open_tag = Off
@@ -50,5 +50,22 @@ php55-enable-short-tag:
     - flags: ['IGNORECASE']
     - append_if_not_found: True
     - backup: False
+    - require:
+      - pkg: php55
+    - watch_in:
+      - service: php55-fpm-service
+
+php55-cli-enable-short-tag:
+  file.replace:
+    - name: /etc/php5/cli/php.ini
+    - pattern: short_open_tag = Off
+    - repl: short_open_tag = On
+    - flags: ['IGNORECASE']
+    - append_if_not_found: True
+    - backup: False
+    - require:
+      - pkg: php55
+    - watch_in:
+      - service: php55-fpm-service
 
 {% endif %}
