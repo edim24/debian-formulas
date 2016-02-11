@@ -1,6 +1,6 @@
 {% from "gearman/map.jinja" import gearman with context %}
-{% if 1 == salt['cmd.retcode']('test -f /srv/locks/gearman.' + gearman.version +'.lock') %}
 
+{% if gearman.server.installed and 1 == salt['cmd.retcode']('test -f /srv/locks/gearman.' + gearman.server.version +'.lock') %}
 include:
   - php55
 
@@ -22,7 +22,7 @@ gearman-job-server-packages:
 
 gearman-job-server-source:
   cmd.run:
-    - name: wget https://launchpad.net/gearmand/1.2/{{ gearman.version }}/+download/gearmand-{{ gearman.version }}.tar.gz
+    - name: wget https://launchpad.net/gearmand/1.2/{{ gearman.server.version }}/+download/gearmand-{{ gearman.server.version }}.tar.gz
     - cwd: /usr/local/src/gearman-job-server/
     - require:
       - pkg: gearman-job-server-packages
@@ -30,7 +30,7 @@ gearman-job-server-source:
 
 gearman-job-server-untar:
   cmd.run:
-    - name: tar xzf gearmand-{{ gearman.version }}.tar.gz
+    - name: tar xzf gearmand-{{ gearman.server.version }}.tar.gz
     - cwd: /usr/local/src/gearman-job-server/
     - require:
       - cmd: gearman-job-server-source
@@ -38,21 +38,21 @@ gearman-job-server-untar:
 gearman-job-server-configure:
   cmd.run:
     - name: ./configure
-    - cwd: /usr/local/src/gearman-job-server/gearmand-{{ gearman.version }}/
+    - cwd: /usr/local/src/gearman-job-server/gearmand-{{ gearman.server.version }}/
     - require:
       - cmd: gearman-job-server-untar
 
 gearman-job-server-make:
   cmd.run:
     - name: make
-    - cwd: /usr/local/src/gearman-job-server/gearmand-{{ gearman.version }}/
+    - cwd: /usr/local/src/gearman-job-server/gearmand-{{ gearman.server.version }}/
     - require:
       - cmd: gearman-job-server-configure
 
 gearman-job-server-make-install:
   cmd.run:
     - name: make install
-    - cwd: /usr/local/src/gearman-job-server/gearmand-{{ gearman.version }}/
+    - cwd: /usr/local/src/gearman-job-server/gearmand-{{ gearman.server.version }}/
     - require:
       - cmd: gearman-job-server-make
 
@@ -86,6 +86,16 @@ gearman-job-server:
     - require:
       - file: /etc/init.d/gearman-job-server
 
+gearman-job-server-lock-file:
+  file.touch:
+    - name: /srv/locks/gearman-job-server.{{ gearman.server.version }}.lock
+    - makedirs: true
+    - require:
+      - cmd: gearman-mod-enable
+
+{% endif %}
+
+{% if gearman.client.installed %}
 gearman:
   pecl.installed
 
@@ -104,12 +114,5 @@ gearman-mod-enable:
     - require:
       - file: /etc/php5/mods-available/gearman.ini
       - pkg: php55
-
-gearman-lock-file:
-  file.touch:
-    - name: /srv/locks/gearman.{{ gearman.version }}.lock
-    - makedirs: true
-    - require:
-      - cmd: gearman-mod-enable
 
 {% endif %}
