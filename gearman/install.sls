@@ -111,6 +111,7 @@ gearman-mod-enable:
   cmd.run:
     - name: php5enmod gearman && service php5-fpm restart
     - onlyif: type php5enmod
+    - unless: /usr/bin/php -m | grep -i gearman
     - require:
       - file: /etc/php5/mods-available/gearman.ini
       - pkg: php55
