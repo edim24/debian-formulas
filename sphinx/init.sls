@@ -4,6 +4,6 @@
 {% if grains['os_family'] == 'Debian' %}
 
 include:
-  - shpinx.install
+  - sphinx.install
 
 {% endif %}
