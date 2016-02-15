@@ -111,7 +111,7 @@ gearman-mod-enable:
 
 gearman-job-server-lock-file:
   file.touch:
-    - name: /srv/locks/gearman-job-server.{{ gearman.version }}.lock
+    - name: /srv/locks/gearman.{{ gearman.version }}.lock
     - makedirs: true
     - require:
       - cmd: gearman-mod-enable
