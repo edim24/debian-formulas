@@ -8,6 +8,6 @@
 {% set gearman = salt['pillar.get'](
         'gearman',
         default=default_settings.gearman,
-        merge=True
+        merge=False
     )
 %}
