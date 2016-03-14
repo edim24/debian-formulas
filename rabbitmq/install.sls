@@ -40,6 +40,28 @@ rabbitmq-lock-file:
 rabbitmq-server:
   service.running
 
+{% if rabbitmq.get('enable_management_plugin', False) %}
+
+rabbitmq-enable-management-plugin:
+  cmd.run:
+    - name: /usr/sbin/rabbitmq-plugins enable rabbitmq_management
+    - unless: /usr/sbin/rabbitmq-plugins list -m -E rabbitmq_management | grep -q "^rabbitmq_management$"
+    - runas: root
+    - require:
+      - service: rabbitmq-server
+
+{% else %}
+
+rabbitmq-disable-management-plugin:
+  cmd.run:
+    - name: /usr/sbin/rabbitmq-plugins disable rabbitmq_management
+    - onlyif: /usr/sbin/rabbitmq-plugins list -m -E rabbitmq_management | grep -q "^rabbitmq_management$"
+    - runas: root
+    - require:
+      - service: rabbitmq-server
+
+{% endif %}
+
 {% for user in rabbitmq.users %}
 
 {#
@@ -90,5 +112,15 @@ rabbitmq-set-permissions-{{ user.name }}:
       - service: rabbitmq-server
 
 {% endif %}
+
+rabbitmq-set-tags-{{ user.name }}:
+  cmd.run:
+    - name: /usr/sbin/rabbitmqctl set_user_tags {{ user.name }} {% for tag in user.get('tags', []) %}{{ tag }} {% endfor %}
+    - unless: /usr/sbin/rabbitmqctl list_users -q | grep -q "^{{ user.name }}\s*\[{% for tag in user.get('tags', []) %}{{ tag }}[, ]*{% endfor %}\]$"
+    - runas: root
+    - require:
+      - cmd: rabbitmq-add-user-{{ user.name }}
+      - service: rabbitmq-server
+
 
 {% endfor %}

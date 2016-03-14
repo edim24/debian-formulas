@@ -3,7 +3,8 @@
 
 rabbitmq:
   version: 3.5.7
+  enable_management_plugin: False
   users: []
 #  users:
-#    - {name: user_1, password: password_1, permissions: {vhostpath: /, conf: .*, write: .*, read: .*}}
-#    - {name: user_2, password: password_2, permissions: {vhostpath: /, conf: .*, write: .*, read: .*}}
+#    - {name: user_1, password: password_1, permissions: {vhostpath: /, conf: .*, write: .*, read: .*}, tags: [management]}
+#    - {name: user_2, password: password_2, permissions: {vhostpath: /, conf: .*, write: .*, read: .*}, tags: []}
