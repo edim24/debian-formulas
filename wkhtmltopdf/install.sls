@@ -38,7 +38,7 @@ wkhtmltopdf-install:
   pkg.installed:
     - unless: which wkhtmltopdf
     - sources:
-      - wkhtmltopdf: /usr/local/src/wkhtmltopdf/{{ wkhtmltopdf.deb }}
+      - wkhtmltox: /usr/local/src/wkhtmltopdf/{{ wkhtmltopdf.deb }}
     - require:
       - cmd: wkhtmltopdf-source
       - pkg: wkhtmltopdf-fonts
