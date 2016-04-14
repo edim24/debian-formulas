@@ -1,6 +1,6 @@
 {% from "nodejs/map.jinja" import npm with context %}
 
-{% if 1 == salt['cmd.retcode']('test -f /srv/locks/nodesource.lock') %}
+{% if salt['file.file_exists']('/srv/locks/nodesource.lock') == False %}
 
 include:
   - curl

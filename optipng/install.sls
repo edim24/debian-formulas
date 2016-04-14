@@ -1,6 +1,6 @@
 {% from "optipng/map.jinja" import optipng with context %}
 
-{% if 1 == salt['cmd.retcode']('test -f /srv/locks/optipng.' + optipng.version +'.lock') %}
+{% if salt['file.file_exists']('/srv/locks/optipng.' + optipng.version + '.lock') == False %}
 
 optipng-libs:
   pkg.installed:

@@ -1,6 +1,6 @@
 {% from "gearman/map.jinja" import gearman with context %}
 
-{% if 1 == salt['cmd.retcode']('test -f /srv/locks/gearman.' + gearman.version + '.lock') %}
+{% if salt['file.file_exists']('/srv/locks/gearman.' + gearman.version + '.lock') == False %}
 
 include:
   - php55

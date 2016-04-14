@@ -1,6 +1,6 @@
 {% from "phalcon/map.jinja" import phalcon with context %}
 
-{% if 1 == salt['cmd.retcode']('test -f /srv/locks/phalcon.' + phalcon.version +'.lock') %}
+{% if salt['file.file_exists']('/srv/locks/phalcon.' + phalcon.version + '.lock') == False %}
 
 include:
   - php55

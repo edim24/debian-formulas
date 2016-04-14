@@ -3,7 +3,7 @@
 
 {% from "capistrano/map.jinja" import capistrano with context %}
 
-{% if 1 == salt['cmd.retcode']('test -f /srv/locks/capistrano.' + capistrano.version +'.lock') %}
+{% if salt['file.file_exists']('/srv/locks/capistrano.' + capistrano.version + '.lock') == False %}
 
 ruby:
   pkg.installed:

@@ -1,6 +1,6 @@
 {% from "rabbitmq/map.jinja" import rabbitmq with context %}
 
-{% if 1 == salt['cmd.retcode']('test -f /srv/locks/rabbitmq.' + rabbitmq.version +'.lock') %}
+{% if salt['file.file_exists']('/srv/locks/rabbitmq.' + rabbitmq.version + '.lock') == False %}
 
 rabbitmq-wget:
   pkg.installed:
