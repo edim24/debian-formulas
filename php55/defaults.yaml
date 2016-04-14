@@ -2,6 +2,7 @@
 # vim: ft=yaml
 
 php55:
+  upload_max_filesize: 2M
   enable_short_open_tag: False
   extentions:
     - php5-curl
