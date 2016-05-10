@@ -10,3 +10,9 @@ php5-xhprof:
     - require:
       - pkg: graphviz
       - pkg: php55
+
+{{ pillar['app_dir'] }}public/xhprof:
+  file.symlink:
+    - target: {{ pillar['app_dir'] }}vendor/lox/xhprof/xhprof_html/
+    - require:
+      - cmd: composer-install
