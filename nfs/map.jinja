@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{## Start with defaults from defaults.yaml ##}
+{% import_yaml 'nfs/defaults.yaml' as default_settings %}
+
+{## Merge in nfs pillar ##}
+{% set nfs = salt['pillar.get'](
+        'nfs',
+        default=default_settings.nfs,
+        merge=False
+    )
+%}

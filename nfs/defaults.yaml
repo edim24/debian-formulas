@@ -1,0 +1,8 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+
+nfs:
+  exports: []
+#  exports:
+#    - '/var/www/example.com/logs 192.168.0.1/32(ro,no_root_squash,no_subtree_check)'
+#    - '/var/log/nginx 192.168.0.1(ro,no_root_squash,no_subtree_check'

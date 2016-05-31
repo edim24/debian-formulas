@@ -1,12 +1,18 @@
-nfs-kernel-server:
-  pkg.installed:
-    - name: nfs-kernel-server
+{% from "nfs/map.jinja" import nfs with context %}
+
+nfs-exports-file:
   file.managed:
     - name: /etc/exports
-    - source: salt://files/exports
+    - contents: {{ nfs.get(exports, []) }}
+
+nfs-kernel-server:
+  pkg.installed:
+    - require:
+      - file: nfs-exports-file
+
+nfs-kernel-server:
   service.running:
     - enable: True
-    - name: nfs-kernel-server
     - require:
       - pkg: nfs-kernel-server
     - watch:
