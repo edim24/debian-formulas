@@ -3,7 +3,7 @@
 nfs-exports-file:
   file.managed:
     - name: /etc/exports
-    - contents: {{ nfs.get(exports, []) }}
+    - contents_pillar: nfs:exports
 
 nfs-kernel-server:
   pkg.installed:
