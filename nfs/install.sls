@@ -9,8 +9,6 @@ nfs-kernel-server:
   pkg.installed:
     - require:
       - file: nfs-exports-file
-
-nfs-kernel-server:
   service.running:
     - enable: True
     - require:
