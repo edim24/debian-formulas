@@ -5,10 +5,8 @@
 environment: local
 # Full path to application dir
 app_dir: /vagrant/
-# Full path to logs dir
-logs_dir: /var/log/supervisor/
-# Workers list
 supervisor:
+  logs_dir: /var/log/supervisor/
   workers: {}
 #    example_worker:
 #      command: /usr/bin/php ./app/cli.php example run

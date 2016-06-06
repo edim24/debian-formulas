@@ -24,6 +24,6 @@
 {% set supervisor = salt['pillar.get'](
         'supervisor',
         default=default_settings.supervisor,
-        merge=False
+        merge=True
     )
 %}
