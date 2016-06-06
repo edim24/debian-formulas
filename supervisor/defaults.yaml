@@ -5,6 +5,7 @@
 environment: local
 # Full path to application dir
 app_dir: /vagrant/
+# Supervisor settings
 supervisor:
   logs_dir: /var/log/supervisor/
   workers: {}
