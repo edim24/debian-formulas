@@ -31,7 +31,7 @@ supervisor:
       {%- else -%}
       numprocs: {{ params['numprocs']['prod'] }}
       {%- endif %}
-      logs_path: {{ app_dir }}logs/
+      logs_dir: {{ logs_dir }}
     - template: jinja
     - makedirs: True
     - require_in:
