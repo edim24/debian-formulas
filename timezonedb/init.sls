@@ -4,6 +4,6 @@
 {% if grains['os_family'] == 'Debian' %}
 
 include:
-  - traceroute.install
+  - timezonedb.install
 
 {% endif %}
