@@ -9,7 +9,6 @@ https://github.com/phalcon/cphalcon.git:
   git.latest:
     - target: /usr/local/src/phalcon
     - rev: {{ phalcon.version }}
-    - depth: 1
 
 phalcon-libs:
   pkg.installed:
