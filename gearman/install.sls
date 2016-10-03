@@ -12,6 +12,7 @@ gearman-job-server-packages:
       - gperf
       - libevent-dev
       - uuid-dev
+      - libcloog-ppl0
       - gearman-tools
     - require:
       - pkg: php55
