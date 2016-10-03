@@ -152,7 +152,7 @@ icu-lock-file:
     - name: /srv/locks/icu.{{ icu.iana_tz_version_number }}.lock
     - makedirs: true
     - require:
-      - cmd: icu-ln
+      - file: icu-ln
     - watch_in:
       - service: php55-fpm-service
 
