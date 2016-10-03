@@ -1,0 +1,6 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+
+icu:
+  iana_tz_version_number: 2016g
+  platform_directory: le

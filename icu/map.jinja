@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{## Start with defaults from defaults.yaml ##}
+{% import_yaml 'icu/defaults.yaml' as default_settings %}
+
+{## Merge in icu pillar ##}
+{% set icu = salt['pillar.get'](
+        'icu',
+        default=default_settings.icu,
+        merge=True
+    )
+%}
