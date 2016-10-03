@@ -15,10 +15,16 @@ icu-packages:
     - require:
       - pkg: php55-extentions
 
+icu-src-clear:
+  file.absent:
+    - name: /usr/src/icu
+
 icu-src:
   cmd.run:
     - name: wget http://download.icu-project.org/files/icu4c/4.8.1.1/icu4c-4_8_1_1-src.tgz
     - cwd: /usr/src
+    - require:
+      - file: /usr/src/icu
 
 icu-untar:
   cmd.run:
@@ -124,29 +130,28 @@ icu-make:
       - cmd: icu-append-timezoneTypes.res
       - cmd: icu-append-windowsZones.res
 
-icu-mv:
-  cmd.run:
-    - name: mv /usr/lib/x86_64-linux-gnu/libicudata.so.48.1.1 /usr/lib/x86_64-linux-gnu/libicudata.so.48.1.1.old
-    - require:
-      - cmd: icu-make
+icu-rm-so:
+  file.absent:
+    - name: /usr/lib/x86_64-linux-gnu/libicudata.so.48.1.1
 
-icu-rm:
-  cmd.run:
-    - name: rm /usr/lib/x86_64-linux-gnu/libicudata.so.48
-    - require:
-      - cmd: icu-mv
+icu-rm-ln:
+  file.absent:
+    - name: /usr/lib/x86_64-linux-gnu/libicudata.so.48
 
-icu-cp:
-  cmd.run:
-    - name: cp /usr/src/icu/source/lib/libicudata.so.48.1.1 /usr/lib/x86_64-linux-gnu/libicudata.so.48.1.1
+icu-so:
+  file.managed:
+    - name: /usr/lib/x86_64-linux-gnu/libicudata.so.48.1.1
+    - source: /usr/src/icu/source/lib/libicudata.so.48.1.1
     - require:
-      - cmd: icu-rm
+      - file: icu-rm-ln
 
 icu-ln:
-  cmd.run:
-    - name: ln -s /usr/lib/x86_64-linux-gnu/libicudata.so.48.1.1 /usr/lib/x86_64-linux-gnu/libicudata.so.48
+  file.symlink:
+    - name: /usr/lib/x86_64-linux-gnu/libicudata.so.48
+    - target: /usr/lib/x86_64-linux-gnu/libicudata.so.48.1.1
+    - force: True
     - require:
-      - cmd: icu-cp
+      - file: icu-so
 
 icu-lock-file:
   file.touch:
