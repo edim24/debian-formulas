@@ -73,7 +73,7 @@ php55-cli-enable-short-tag:
 php55-fpm-upload-max-filesize:
   file.replace:
     - name: /etc/php5/fpm/php.ini
-    - pattern: upload_max_filesize = [0-9]\{1,\}[KMG]$
+    - pattern: upload_max_filesize = [0-9]{1,}[KMG]$
     - repl: upload_max_filesize = {{ php55.get('upload_max_filesize', '2M') }}
     - flags: ['IGNORECASE']
     - append_if_not_found: True
