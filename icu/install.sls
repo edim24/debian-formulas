@@ -154,5 +154,7 @@ icu-lock-file:
     - makedirs: true
     - require:
       - cmd: icu-ln
+    - watch_in:
+      - service: php55-fpm-service
 
 {% endif %}
