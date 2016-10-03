@@ -130,20 +130,13 @@ icu-make:
       - cmd: icu-append-timezoneTypes.res
       - cmd: icu-append-windowsZones.res
 
-icu-rm-so:
-  file.absent:
-    - name: /usr/lib/x86_64-linux-gnu/libicudata.so.48.1.1
-
-icu-rm-ln:
-  file.absent:
-    - name: /usr/lib/x86_64-linux-gnu/libicudata.so.48
-
 icu-so:
   file.managed:
     - name: /usr/lib/x86_64-linux-gnu/libicudata.so.48.1.1
     - source: /usr/src/icu/source/lib/libicudata.so.48.1.1
+    - replace: True
     - require:
-      - file: icu-rm-ln
+      - cmd: icu-make
 
 icu-ln:
   file.symlink:
