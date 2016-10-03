@@ -22,6 +22,7 @@ icu-src-clear:
 icu-src:
   cmd.run:
     - name: wget http://download.icu-project.org/files/icu4c/4.8.1.1/icu4c-4_8_1_1-src.tgz
+    - creates: /usr/src/icu4c-4_8_1_1-src.tgz
     - cwd: /usr/src
     - require:
       - file: /usr/src/icu
