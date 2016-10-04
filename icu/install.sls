@@ -131,28 +131,36 @@ icu-make:
       - cmd: icu-append-timezoneTypes.res
       - cmd: icu-append-windowsZones.res
 
-icu-so:
-  file.managed:
-    - name: /usr/lib/x86_64-linux-gnu/libicudata.so.48.1.1
-    - source: /usr/src/icu/source/lib/libicudata.so.48.1.1
-    - replace: True
+icu-rm-so:
+  cmd.run:
+    - name: rm /usr/lib/x86_64-linux-gnu/libicudata.so.48.1.1
     - require:
       - cmd: icu-make
 
-icu-ln:
-  file.symlink:
-    - name: /usr/lib/x86_64-linux-gnu/libicudata.so.48
-    - target: /usr/lib/x86_64-linux-gnu/libicudata.so.48.1.1
-    - force: True
+icu-cp-so:
+  cmd.run:
+    - name: cp /usr/src/icu/source/lib/libicudata.so.48.1.1 /usr/lib/x86_64-linux-gnu/libicudata.so.48.1.1
     - require:
-      - file: icu-so
+      - cmd: icu-rm-so
+
+icu-rm-ln:
+  cmd.run:
+    - name: rm /usr/lib/x86_64-linux-gnu/libicudata.so.48
+    - require:
+      - cmd: icu-cp-so
+
+icu-ln:
+  cmd.run:
+    - name: ln -s /usr/lib/x86_64-linux-gnu/libicudata.so.48.1.1 /usr/lib/x86_64-linux-gnu/libicudata.so.48
+    - require:
+      - cmd: icu-rm-ln
 
 icu-lock-file:
   file.touch:
     - name: /srv/locks/icu.{{ icu.iana_tz_version_number }}.lock
     - makedirs: true
     - require:
-      - file: icu-ln
+      - cmd: icu-ln
     - watch_in:
       - service: php55-fpm-service
 
