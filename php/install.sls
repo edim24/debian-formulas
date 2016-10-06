@@ -11,7 +11,7 @@ php:
     - pkgs:
       - php7.0-common
       - php7.0-cli
-      - php7.0-fpm-fpm
+      - php7.0-fpm
       - php7.0-dev
     - require:
       - pkgrepo: php-dotdeb
