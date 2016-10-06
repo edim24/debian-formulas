@@ -2,17 +2,19 @@
 
 php-dotdeb:
   pkgrepo.managed:
-    - name: deb http://packages.dotdeb.org jessie all
-    - file: /etc/apt/sources.list
+    - names:
+      - deb http://packages.dotdeb.org jessie all
+      - deb-src http://packages.dotdeb.org jessie all
+    - file: /etc/apt/sources.list.d/dotdeb.list
     - key_url: https://www.dotdeb.org/dotdeb.gpg
 
 php:
   pkg.installed:
     - pkgs:
-      - php
+      - php7.0
       - php7.0-common
-      - php7.0-cli
       - php7.0-fpm
+      - php7.0-cli
       - php7.0-dev
     - require:
       - pkgrepo: php-dotdeb
