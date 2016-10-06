@@ -61,75 +61,35 @@ icu-icupkg-make:
     - require:
       - cmd: icu-untar
 
-icu-zoneinfo64.res:
+icu-download-res-files:
   cmd.run:
-    - name: wget http://source.icu-project.org/repos/icu/data/trunk/tzdata/icunew/{{ icu.iana_tz_version_number }}/44/{{ icu.platform_directory }}/zoneinfo64.res
+    - names:
+      - wget http://source.icu-project.org/repos/icu/data/trunk/tzdata/icunew/{{ icu.iana_tz_version_number }}/44/{{ icu.platform_directory }}/zoneinfo64.res
+      - wget http://source.icu-project.org/repos/icu/data/trunk/tzdata/icunew/{{ icu.iana_tz_version_number }}/44/{{ icu.platform_directory }}/metaZones.res
+      - wget http://source.icu-project.org/repos/icu/data/trunk/tzdata/icunew/{{ icu.iana_tz_version_number }}/44/{{ icu.platform_directory }}/timezoneTypes.res
+      - wget http://source.icu-project.org/repos/icu/data/trunk/tzdata/icunew/{{ icu.iana_tz_version_number }}/44/{{ icu.platform_directory }}/windowsZones.res
     - cwd: /usr/src/icu/source/data/in/
     - require:
       - file: /usr/src/icu/source/data/in/
-
-icu-append-zoneinfo64.res:
-  cmd.run:
-    - name: ../../bin/icupkg -a zoneinfo64.res icudt48l.dat
-    - cwd: /usr/src/icu/source/data/in/
-    - require:
       - cmd: icu-icupkg-make
-      - cmd: icu-zoneinfo64.res
 
-icu-metaZones.res:
+icu-append-res-files:
   cmd.run:
-    - name: wget http://source.icu-project.org/repos/icu/data/trunk/tzdata/icunew/{{ icu.iana_tz_version_number }}/44/{{ icu.platform_directory }}/metaZones.res
+    - names:
+      - ../../bin/icupkg -a zoneinfo64.res icudt48l.dat
+      - ../../bin/icupkg -a metaZones.res icudt48l.dat
+      - ../../bin/icupkg -a timezoneTypes.res icudt48l.dat
+      - ../../bin/icupkg -a windowsZones.res icudt48l.dat
     - cwd: /usr/src/icu/source/data/in/
     - require:
-      - file: /usr/src/icu/source/data/in/
-
-icu-append-metaZones.res:
-  cmd.run:
-    - name: ../../bin/icupkg -a metaZones.res icudt48l.dat
-    - cwd: /usr/src/icu/source/data/in/
-    - require:
-      - cmd: icu-icupkg-make
-      - cmd: icu-metaZones.res
-
-icu-timezoneTypes.res:
-  cmd.run:
-    - name: wget http://source.icu-project.org/repos/icu/data/trunk/tzdata/icunew/{{ icu.iana_tz_version_number }}/44/{{ icu.platform_directory }}/timezoneTypes.res
-    - cwd: /usr/src/icu/source/data/in/
-    - require:
-      - file: /usr/src/icu/source/data/in/
-
-icu-append-timezoneTypes.res:
-  cmd.run:
-    - name: ../../bin/icupkg -a timezoneTypes.res icudt48l.dat
-    - cwd: /usr/src/icu/source/data/in/
-    - require:
-      - cmd: icu-icupkg-make
-      - cmd: icu-timezoneTypes.res
-
-icu-windowsZones.res:
-  cmd.run:
-    - name: wget http://source.icu-project.org/repos/icu/data/trunk/tzdata/icunew/{{ icu.iana_tz_version_number }}/44/{{ icu.platform_directory }}/windowsZones.res
-    - cwd: /usr/src/icu/source/data/in/
-    - require:
-      - file: /usr/src/icu/source/data/in/
-
-icu-append-windowsZones.res:
-  cmd.run:
-    - name: ../../bin/icupkg -a windowsZones.res icudt48l.dat
-    - cwd: /usr/src/icu/source/data/in/
-    - require:
-      - cmd: icu-icupkg-make
-      - cmd: icu-windowsZones.res
+      - cmd: icu-download-res-files
 
 icu-make:
   cmd.run:
     - name: make
     - cwd: /usr/src/icu/source/
     - require:
-      - cmd: icu-append-zoneinfo64.res
-      - cmd: icu-append-metaZones.res
-      - cmd: icu-append-timezoneTypes.res
-      - cmd: icu-append-windowsZones.res
+      - cmd: icu-append-res-files
 
 icu-rm-so:
   cmd.run:
