@@ -21,15 +21,15 @@ icu-src-clear:
 
 icu-src:
   cmd.run:
-    - name: wget http://download.icu-project.org/files/icu4c/4.8.1.1/icu4c-4_8_1_1-src.tgz
-    - creates: /usr/src/icu4c-4_8_1_1-src.tgz
+    - name: wget http://download.icu-project.org/files/icu4c/52.1/icu4c-52_1-src.tgz
+    - creates: /usr/src/icu4c-52_1-src.tgz
     - cwd: /usr/src
     - require:
       - file: /usr/src/icu
 
 icu-untar:
   cmd.run:
-    - name: tar xzf icu4c-4_8_1_1-src.tgz
+    - name: tar xzf icu4c-52_1-src.tgz
     - cwd: /usr/src
     - require:
       - cmd: icu-src
@@ -55,12 +55,6 @@ icu-icupkg-make:
     - require:
       - cmd: icu-configure
 
-/usr/src/icu/source/data/in/:
-  file.directory:
-    - makedirs: True
-    - require:
-      - cmd: icu-untar
-
 icu-download-res-files:
   cmd.run:
     - names:
@@ -70,16 +64,15 @@ icu-download-res-files:
       - wget http://source.icu-project.org/repos/icu/data/trunk/tzdata/icunew/{{ icu.iana_tz_version_number }}/44/{{ icu.platform_directory }}/windowsZones.res
     - cwd: /usr/src/icu/source/data/in/
     - require:
-      - file: /usr/src/icu/source/data/in/
       - cmd: icu-icupkg-make
 
 icu-append-res-files:
   cmd.run:
     - names:
-      - ../../bin/icupkg -a zoneinfo64.res icudt48l.dat
-      - ../../bin/icupkg -a metaZones.res icudt48l.dat
-      - ../../bin/icupkg -a timezoneTypes.res icudt48l.dat
-      - ../../bin/icupkg -a windowsZones.res icudt48l.dat
+      - ../../bin/icupkg -a zoneinfo64.res icudt52l.dat
+      - ../../bin/icupkg -a metaZones.res icudt52l.dat
+      - ../../bin/icupkg -a timezoneTypes.res icudt52l.dat
+      - ../../bin/icupkg -a windowsZones.res icudt52l.dat
     - cwd: /usr/src/icu/source/data/in/
     - require:
       - cmd: icu-download-res-files
@@ -93,34 +86,22 @@ icu-make:
 
 icu-rm-so:
   cmd.run:
-    - name: rm /usr/lib/x86_64-linux-gnu/libicudata.so.48.1.1
+    - name: rm /usr/lib/x86_64-linux-gnu/libicudata.so.52.1
     - require:
       - cmd: icu-make
 
 icu-cp-so:
   cmd.run:
-    - name: cp /usr/src/icu/source/lib/libicudata.so.48.1.1 /usr/lib/x86_64-linux-gnu/libicudata.so.48.1.1
+    - name: cp /usr/src/icu/source/lib/libicudata.so.52.1 /usr/lib/x86_64-linux-gnu/libicudata.so.52.1
     - require:
       - cmd: icu-rm-so
-
-icu-rm-ln:
-  cmd.run:
-    - name: rm /usr/lib/x86_64-linux-gnu/libicudata.so.48
-    - require:
-      - cmd: icu-cp-so
-
-icu-ln:
-  cmd.run:
-    - name: ln -s /usr/lib/x86_64-linux-gnu/libicudata.so.48.1.1 /usr/lib/x86_64-linux-gnu/libicudata.so.48
-    - require:
-      - cmd: icu-rm-ln
 
 icu-lock-file:
   file.touch:
     - name: /srv/locks/icu.{{ icu.iana_tz_version_number }}.lock
     - makedirs: true
     - require:
-      - cmd: icu-ln
+      - cmd: icu-cp-so
     - watch_in:
       - service: php-fpm-service
 
