@@ -2,14 +2,14 @@
 # vim: ft=sls
 
 include:
-  - php55
+  - php
 
 timezonedb:
   pecl.installed:
     - require:
-      - pkg: php55
+      - pkg: php
 
-/etc/php5/mods-available/timezonedb.ini:
+/etc/php/7.0/mods-available/timezonedb.ini:
   file.managed:
     - user: root
     - group: root
@@ -20,8 +20,8 @@ timezonedb:
 
 timezonedb-mod-enable:
   cmd.run:
-    - name: php5enmod timezonedb && service php5-fpm restart
-    - onlyif: type php5enmod
+    - name: phpenmod timezonedb && service php7.0-fpm restart
+    - onlyif: type phpenmod
     - unless: /usr/bin/php -m | grep -i timezonedb
     - require:
-      - file: /etc/php5/mods-available/timezonedb.ini
+      - file: /etc/php/7.0/mods-available/timezonedb.ini

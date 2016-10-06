@@ -4,6 +4,6 @@
 {% if grains['os_family'] == 'Debian' %}
 
 include:
-  - php55.install
+  - php.install
 
 {% endif %}

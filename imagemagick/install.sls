@@ -1,10 +1,10 @@
 include:
-  - php55
+  - php
 
 imagemagick:
   pkg.installed:
     - pkgs:
-      - php5-imagick
+      - php7.0-imagick
       - imagemagick
     - require:
-      - pkg: php55
+      - pkg: php

@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{## Start with defaults from defaults.yaml ##}
+{% import_yaml 'php/defaults.yaml' as default_settings %}
+
+{## Merge in php pillar ##}
+{% set php = salt['pillar.get'](
+        'php',
+        default=default_settings.php,
+        merge=True
+    )
+%}

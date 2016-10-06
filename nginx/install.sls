@@ -1,10 +1,10 @@
 include:
-  - php55
+  - php
 
 nginx:
   pkg.installed:
     - require_in:
-      - pkg: php55
+      - pkg: php
   service.running:
     - require:
       - pkg: nginx

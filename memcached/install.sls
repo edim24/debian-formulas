@@ -33,11 +33,12 @@ memcached-service:
 {% if memcached.client.installed == True %}
 
 include:
-  - php55
+  - php
 
-php5-memcache:
+memcached-php-extention:
   pkg.installed:
+    - name: php7.0-memcached
     - require:
-      - pkg: php55
+      - pkg: php
 
 {% endif %}

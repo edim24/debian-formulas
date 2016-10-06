@@ -3,48 +3,34 @@
 {% if salt['file.file_exists']('/srv/locks/phalcon.' + phalcon.version + '.lock') == False %}
 
 include:
-  - php55
+  - curl
+  - php
 
-https://github.com/phalcon/cphalcon.git:
-  git.latest:
-    - target: /usr/local/src/phalcon
-    - rev: {{ phalcon.version }}
+phalcon-deb:
+  cmd.run:
+    - name: wget -qO- https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | sudo bash
+    - require:
+      - pkg: curl
 
-phalcon-libs:
+phalcon-apt-update:
+  cmd.run:
+    - name: sudo apt-get update
+    - require:
+      - cmd: phalcon-deb
+
+phalcon-install:
   pkg.installed:
-    - pkgs:
-      - libpcre3-dev
-
-phalcon-build:
-  cmd.run:
-    - name: ./install
-    - cwd: /usr/local/src/phalcon/ext/
+    - name: php7.0-phalcon
+    - version: {{ phalcon.version }}
     - require:
-      - git: https://github.com/phalcon/cphalcon.git
-      - pkg: phalcon-libs
-      - pkg: php55
-      - service: php55-fpm-service
-
-/etc/php5/mods-available/phalcon.ini:
-  file.managed:
-    - user: root
-    - group: root
-    - source: salt://phalcon/phalcon.ini
-    - require:
-      - cmd: phalcon-build
-
-phalcon-mod-enable:
-  cmd.run:
-    - name: php5enmod phalcon && service php5-fpm restart
-    - onlyif: type php5enmod
-    - require:
-      - file: /etc/php5/mods-available/phalcon.ini
+      - pkg: php
+      - cmd: phalcon-apt-update
 
 phalcon-lock-file:
   file.touch:
     - name: /srv/locks/phalcon.{{ phalcon.version }}.lock
     - makedirs: true
     - require:
-      - cmd: phalcon-mod-enable
+      - pkg: phalcon-install
 
 {% endif %}
