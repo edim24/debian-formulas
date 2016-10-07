@@ -2,4 +2,4 @@
 # vim: ft=yaml
 
 capistrano:
-  version: 2.15.5
+  version: 3.6.1
