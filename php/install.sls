@@ -11,8 +11,6 @@ php-dotdeb:
 php:
   pkg.installed:
     - pkgs:
-      - php7.0
-      - php7.0-common
       - php7.0-fpm
       - php7.0-cli
       - php7.0-dev
