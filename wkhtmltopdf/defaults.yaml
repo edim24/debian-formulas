@@ -1,0 +1,6 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+
+wkhtmltopdf:
+  # Require version >= 0.12.3 with existing bin files
+  version: 0.12.3
