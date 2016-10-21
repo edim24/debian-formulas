@@ -25,7 +25,7 @@ icu-src:
     - creates: /usr/src/icu4c-52_1-src.tgz
     - cwd: /usr/src
     - require:
-      - file: /usr/src/icu
+      - file: icu-src-clear
 
 icu-untar:
   cmd.run:
