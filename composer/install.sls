@@ -11,9 +11,17 @@ composer-get:
       - pkg: curl
       - pkg: php
 
+composer-zip-pkgs:
+    pkg.installed:
+    - pkgs:
+      - zip
+      - unzip
+
 composer-setup:
   cmd.wait:
     - name: mv /root/composer.phar /usr/local/bin/composer
     - cwd: /root/
+    - require:
+      - pkg: composer-zip-pkgs
     - watch:
       - cmd: composer-get
