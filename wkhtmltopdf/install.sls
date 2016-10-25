@@ -23,7 +23,7 @@ wkhtmltopdf-untar:
 
 wkhtmltopdf-rm-bin:
   cmd.run:
-    - name: rm /usr/bin/wkhtmlto*
+    - name: rm -f /usr/bin/wkhtmlto*
     - require:
       - cmd: wkhtmltopdf-untar
 
