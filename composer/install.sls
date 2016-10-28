@@ -1,15 +1,30 @@
+{% if salt['file.file_exists']('/srv/locks/composer.lock') == False %}
+
 include:
   - php
-  - curl
 
-composer-get:
+composer-installer:
   cmd.run:
-    - name: 'CURL=`which curl`; $CURL -sS https://getcomposer.org/installer | php'
-    - unless: test -f /usr/local/bin/composer
-    - cwd: /root/
+    - name: php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    - cwd: /root
     - require:
-      - pkg: curl
       - pkg: php
+
+composer-setup:
+  cmd.run:
+    - name: php composer-setup.php
+    - env:
+      - HOME: /root
+    - cwd: /root
+    - require:
+      - cmd: composer-installer
+
+composer-remove-installer:
+  cmd.run:
+    - name: rm -f composer-setup.php
+    - cwd: /root
+    - require:
+      - cmd: composer-setup
 
 composer-zip-pkgs:
     pkg.installed:
@@ -17,11 +32,25 @@ composer-zip-pkgs:
       - zip
       - unzip
 
-composer-setup:
-  cmd.wait:
+composer-mv:
+  cmd.run:
     - name: mv /root/composer.phar /usr/local/bin/composer
-    - cwd: /root/
     - require:
       - pkg: composer-zip-pkgs
-    - watch:
-      - cmd: composer-get
+      - cmd: composer-setup
+
+
+composer-lock-file:
+  file.touch:
+    - name: /srv/locks/composer.lock
+    - makedirs: true
+    - require:
+      - cmd: composer-mv
+    - require_in:
+      - file: composer-complete
+
+{% endif %}
+
+composer-complete:
+  file.exists:
+    - name: /usr/local/bin/composer
