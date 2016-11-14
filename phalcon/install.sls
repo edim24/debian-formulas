@@ -25,6 +25,8 @@ phalcon-install:
     - require:
       - pkg: php
       - cmd: phalcon-apt-update
+    - watch_in:
+      - service: php-fpm-service
 
 phalcon-lock-file:
   file.touch:
