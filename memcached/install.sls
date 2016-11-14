@@ -40,5 +40,7 @@ memcached-php-extention:
     - name: php7.0-memcached
     - require:
       - pkg: php
+    - watch_in:
+      - service: php-fpm-service
 
 {% endif %}
