@@ -61,6 +61,7 @@ iptables_enable_reject_policy:
     - table: filter
     - chain: INPUT
     - policy: DROP
+    - save: True
     - require:
       - iptables: iptables_allow_established
       - iptables: iptables_allow_icmp
