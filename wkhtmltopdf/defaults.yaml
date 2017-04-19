@@ -3,4 +3,4 @@
 
 wkhtmltopdf:
   # Require version >= 0.12.3 with existing bin files
-  version: 0.12.3
+  version: 0.12.4
