@@ -2,12 +2,12 @@
 # vim: ft=sls
 
 include:
-  - php55
+  - php5x
 
 timezonedb:
   pecl.installed:
     - require:
-      - pkg: php55
+      - pkg: php5x
 
 /etc/php5/mods-available/timezonedb.ini:
   file.managed:

@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
 
-php55:
+php5x:
   upload_max_filesize: 2M
   enable_short_open_tag: False
+  php_pkgrepo: deb http://packages.dotdeb.org wheezy-php55 all
   extentions:
     - php5-curl

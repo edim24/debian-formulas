@@ -1,12 +1,12 @@
-{% from "php55/map.jinja" import php55 with context %}
+{% from "php5x/map.jinja" import php5x with context %}
 
-php55-dotdeb:
+php5x-dotdeb:
   pkgrepo.managed:
-    - name: deb http://packages.dotdeb.org wheezy-php55 all
+    - name: {{ php5x.php_pkgrepo }}
     - file: /etc/apt/sources.list
     - key_url: http://www.dotdeb.org/dotdeb.gpg
 
-php55:
+php5x:
   pkg.installed:
     - pkgs:
       - php5-common
@@ -14,35 +14,35 @@ php55:
       - php5-fpm
       - php5-dev
     - require:
-      - pkgrepo: php55-dotdeb
+      - pkgrepo: php5x-dotdeb
 
-php55-extentions:
+php5x-extentions:
   pkg.installed:
-    - pkgs: {{ php55.extensions }}
+    - pkgs: {{ php5x.extensions }}
     - require:
-      - pkg: php55
+      - pkg: php5x
 
-php55-www-conf:
+php5x-www-conf:
   file.managed:
     - name: /etc/php5/fpm/pool.d/www.conf
-    - source: salt://php55/www.conf
+    - source: salt://php5x/www.conf
     - user: root
     - group: root
     - require:
-      - pkg: php55
+      - pkg: php5x
 
-php55-fpm-service:
+php5x-fpm-service:
   service.running:
     - name: php5-fpm
     - watch:
-      - pkg: php55-extentions
-      - file: php55-www-conf
+      - pkg: php5x-extentions
+      - file: php5x-www-conf
     - require:
-      - pkg: php55
+      - pkg: php5x
 
-{% if php55.get('enable_short_open_tag', False) %}
+{% if php5x.get('enable_short_open_tag', False) %}
 
-php55-fpm-enable-short-tag:
+php5x-fpm-enable-short-tag:
   file.replace:
     - name: /etc/php5/fpm/php.ini
     - pattern: short_open_tag = Off
@@ -51,11 +51,11 @@ php55-fpm-enable-short-tag:
     - append_if_not_found: True
     - backup: False
     - require:
-      - pkg: php55
+      - pkg: php5x
     - watch_in:
-      - service: php55-fpm-service
+      - service: php5x-fpm-service
 
-php55-cli-enable-short-tag:
+php5x-cli-enable-short-tag:
   file.replace:
     - name: /etc/php5/cli/php.ini
     - pattern: short_open_tag = Off
@@ -64,21 +64,21 @@ php55-cli-enable-short-tag:
     - append_if_not_found: True
     - backup: False
     - require:
-      - pkg: php55
+      - pkg: php5x
     - watch_in:
-      - service: php55-fpm-service
+      - service: php5x-fpm-service
 
 {% endif %}
 
-php55-fpm-upload-max-filesize:
+php5x-fpm-upload-max-filesize:
   file.replace:
     - name: /etc/php5/fpm/php.ini
     - pattern: upload_max_filesize = [0-9]{1,}[KMG]$
-    - repl: upload_max_filesize = {{ php55.get('upload_max_filesize', '2M') }}
+    - repl: upload_max_filesize = {{ php5x.get('upload_max_filesize', '2M') }}
     - flags: ['IGNORECASE']
     - append_if_not_found: True
     - backup: False
     - require:
-      - pkg: php55
+      - pkg: php5x
     - watch_in:
-      - service: php55-fpm-service
+      - service: php5x-fpm-service

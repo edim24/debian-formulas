@@ -1,5 +1,5 @@
 include:
-  - php55
+  - php5x
 
 graphviz:
   pkg.installed
@@ -9,4 +9,4 @@ php5-xhprof:
     - installed
     - require:
       - pkg: graphviz
-      - pkg: php55
+      - pkg: php5x

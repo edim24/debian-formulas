@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{## Start with defaults from defaults.yaml ##}
+{% import_yaml 'php5x/defaults.yaml' as default_settings %}
+
+{## Merge in php5x pillar ##}
+{% set php5x = salt['pillar.get'](
+        'php5x',
+        default=default_settings.php5x,
+        merge=True
+    )
+%}

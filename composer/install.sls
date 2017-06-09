@@ -1,5 +1,5 @@
 include:
-  - php55
+  - php5x
   - curl
 
 composer-get:
@@ -9,7 +9,7 @@ composer-get:
     - cwd: /root/
     - require:
       - pkg: curl
-      - pkg: php55
+      - pkg: php5x
 
 composer-setup:
   cmd.wait:

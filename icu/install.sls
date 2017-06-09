@@ -3,7 +3,7 @@
 {% if salt['file.file_exists']('/srv/locks/icu.' + icu.iana_tz_version_number + '.lock') == False %}
 
 include:
-  - php55
+  - php5x
 
 icu-packages:
   pkg.installed:
@@ -13,7 +13,7 @@ icu-packages:
       - g++
       - make
     - require:
-      - pkg: php55-extentions
+      - pkg: php5x-extentions
 
 icu-src-clear:
   file.absent:
@@ -122,6 +122,6 @@ icu-lock-file:
     - require:
       - cmd: icu-ln
     - watch_in:
-      - service: php55-fpm-service
+      - service: php5x-fpm-service
 
 {% endif %}

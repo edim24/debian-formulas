@@ -3,7 +3,7 @@
 {% if salt['file.file_exists']('/srv/locks/phalcon.' + phalcon.version + '.lock') == False %}
 
 include:
-  - php55
+  - php5x
 
 https://github.com/phalcon/cphalcon.git:
   git.latest:
@@ -22,8 +22,8 @@ phalcon-build:
     - require:
       - git: https://github.com/phalcon/cphalcon.git
       - pkg: phalcon-libs
-      - pkg: php55
-      - service: php55-fpm-service
+      - pkg: php5x
+      - service: php5x-fpm-service
 
 /etc/php5/mods-available/phalcon.ini:
   file.managed:

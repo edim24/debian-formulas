@@ -1,10 +1,10 @@
 include:
-  - php55
+  - php5x
 
 php5-xdebug:
   pkg.installed:
     - require:
-      - pkg: php55
+      - pkg: php5x
 
 /etc/php5/mods-available/xdebug.ini:
   file.managed:
@@ -15,4 +15,4 @@ php5-xdebug:
     - require:
       - pkg: php5-xdebug
     - watch_in:
-      - service: php55-fpm-service
+      - service: php5x-fpm-service

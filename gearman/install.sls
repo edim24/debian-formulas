@@ -3,7 +3,7 @@
 {% if salt['file.file_exists']('/srv/locks/gearman.' + gearman.version + '.lock') == False %}
 
 include:
-  - php55
+  - php5x
 
 gearman-job-server-packages:
   pkg.installed:
@@ -15,7 +15,7 @@ gearman-job-server-packages:
       - libcloog-ppl0
       - gearman-tools
     - require:
-      - pkg: php55
+      - pkg: php5x
 
 /usr/local/src/gearman-job-server:
   file.directory:
@@ -108,7 +108,7 @@ gearman-mod-enable:
     - unless: /usr/bin/php -m | grep -i gearman
     - require:
       - file: /etc/php5/mods-available/gearman.ini
-      - pkg: php55
+      - pkg: php5x
 
 gearman-job-server-lock-file:
   file.touch:
