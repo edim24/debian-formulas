@@ -66,10 +66,11 @@ gearman-job-server-make-install:
       - cmd: gearman-job-server-make-install
 
 /var/log/gearman-job-server/gearmand.log:
-  file.managed:
+  file.touch:
     - user: root
     - group: root
     - mode: 755
+    - makedirs: true
     - require:
       - file: /var/log/gearman-job-server
 
