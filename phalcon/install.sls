@@ -12,12 +12,6 @@ phalcon-deb:
     - require:
       - pkg: curl
 
-phalcon-apt-update:
-  cmd.run:
-    - name: sudo apt-get update
-    - require:
-      - cmd: phalcon-deb
-
 phalcon-install:
   pkg.installed:
     - name: php7.1-phalcon
