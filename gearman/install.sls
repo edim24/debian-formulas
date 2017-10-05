@@ -93,7 +93,7 @@ gearman:
     - require:
       - service: gearman-job-server
 
-/etc/php/7.0/mods-available/gearman.ini:
+/etc/php/7.1/mods-available/gearman.ini:
   file.managed:
     - user: root
     - group: root
@@ -103,11 +103,11 @@ gearman:
 
 gearman-mod-enable:
   cmd.run:
-    - name: phpenmod gearman && service php7.0-fpm restart
+    - name: phpenmod gearman && service php7.1-fpm restart
     - onlyif: type phpenmod
     - unless: /usr/bin/php -m | grep -i gearman
     - require:
-      - file: /etc/php/7.0/mods-available/gearman.ini
+      - file: /etc/php/7.1/mods-available/gearman.ini
       - pkg: php
 
 gearman-job-server-lock-file:

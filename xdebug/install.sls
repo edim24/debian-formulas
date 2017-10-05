@@ -3,13 +3,13 @@ include:
 
 xdebug-php-extention:
   pkg.installed:
-    - name: php7.0-xdebug
+    - name: php-xdebug
     - require:
       - pkg: php
 
 xdebug-ini-file:
   file.managed:
-    - name: /etc/php/7.0/mods-available/xdebug.ini
+    - name: /etc/php/7.1/mods-available/xdebug.ini
     - user: root
     - group: root
     - mode: 644

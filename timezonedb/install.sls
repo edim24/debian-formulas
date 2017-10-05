@@ -9,7 +9,7 @@ timezonedb:
     - require:
       - pkg: php
 
-/etc/php/7.0/mods-available/timezonedb.ini:
+/etc/php/7.1/mods-available/timezonedb.ini:
   file.managed:
     - user: root
     - group: root
@@ -20,8 +20,8 @@ timezonedb:
 
 timezonedb-mod-enable:
   cmd.run:
-    - name: phpenmod timezonedb && service php7.0-fpm restart
+    - name: phpenmod timezonedb && service php7.1-fpm restart
     - onlyif: type phpenmod
     - unless: /usr/bin/php -m | grep -i timezonedb
     - require:
-      - file: /etc/php/7.0/mods-available/timezonedb.ini
+      - file: /etc/php/7.1/mods-available/timezonedb.ini

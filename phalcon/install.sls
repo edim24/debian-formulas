@@ -8,7 +8,7 @@ include:
 
 phalcon-deb:
   cmd.run:
-    - name: wget -qO- https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | sudo bash
+    - name: curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | sudo bash
     - require:
       - pkg: curl
 
@@ -20,11 +20,11 @@ phalcon-apt-update:
 
 phalcon-install:
   pkg.installed:
-    - name: php7.0-phalcon
+    - name: php7.1-phalcon
     - version: {{ phalcon.version }}
     - require:
       - pkg: php
-      - cmd: phalcon-apt-update
+      - cmd: phalcon-deb
     - watch_in:
       - service: php-fpm-service
 

@@ -37,7 +37,7 @@ include:
 
 memcached-php-extention:
   pkg.installed:
-    - name: php7.0-memcached
+    - name: php-memcached
     - require:
       - pkg: php
     - watch_in:

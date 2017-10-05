@@ -6,4 +6,4 @@
 # Don't touch unless you know what you're doing!
 sudoers:
   commands: {}
-#    www-data: '/etc/init.d/php7.0-fpm restart'
+#    www-data: '/etc/init.d/php7.1-fpm restart'

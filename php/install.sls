@@ -1,21 +1,27 @@
 {% from "php/map.jinja" import php with context %}
 
-php-dotdeb:
+php-deps:
+  pkg.installed:
+    - pkgs:
+      - apt-transport-https
+      - ca-certificates
+
+php-repo:
   pkgrepo.managed:
-    - names:
-      - deb http://packages.dotdeb.org jessie all
-      - deb-src http://packages.dotdeb.org jessie all
-    - file: /etc/apt/sources.list.d/dotdeb.list
-    - key_url: https://www.dotdeb.org/dotdeb.gpg
+    - name: deb https://packages.sury.org/php/ jessie main
+    - file: /etc/apt/sources.list.d/php.list
+    - key_url: https://packages.sury.org/php/apt.gpg
+    - require:
+      - pkg: php-deps
 
 php:
   pkg.installed:
     - pkgs:
-      - php7.0-fpm
-      - php7.0-cli
-      - php7.0-dev
+      - php7.1-fpm
+      - php7.1-cli
+      - php7.1-dev
     - require:
-      - pkgrepo: php-dotdeb
+      - pkgrepo: php-repo
 
 php-extentions:
   pkg.installed:
@@ -25,7 +31,7 @@ php-extentions:
 
 php-www-conf:
   file.managed:
-    - name: /etc/php/7.0/fpm/pool.d/www.conf
+    - name: /etc/php/7.1/fpm/pool.d/www.conf
     - source: salt://php/www.conf
     - user: root
     - group: root
@@ -34,7 +40,7 @@ php-www-conf:
 
 php-fpm-service:
   service.running:
-    - name: php7.0-fpm
+    - name: php7.1-fpm
     - watch:
       - pkg: php-extentions
       - file: php-www-conf
@@ -45,7 +51,7 @@ php-fpm-service:
 
 php-fpm-enable-short-tag:
   file.replace:
-    - name: /etc/php/7.0/fpm/php.ini
+    - name: /etc/php/7.1/fpm/php.ini
     - pattern: short_open_tag = Off
     - repl: short_open_tag = On
     - flags: ['IGNORECASE']
@@ -58,7 +64,7 @@ php-fpm-enable-short-tag:
 
 php-cli-enable-short-tag:
   file.replace:
-    - name: /etc/php/7.0/cli/php.ini
+    - name: /etc/php/7.1/cli/php.ini
     - pattern: short_open_tag = Off
     - repl: short_open_tag = On
     - flags: ['IGNORECASE']
@@ -73,7 +79,7 @@ php-cli-enable-short-tag:
 
 php-fpm-upload-max-filesize:
   file.replace:
-    - name: /etc/php/7.0/fpm/php.ini
+    - name: /etc/php/7.1/fpm/php.ini
     - pattern: upload_max_filesize = [0-9]{1,}[KMG]$
     - repl: upload_max_filesize = {{ php.get('upload_max_filesize', '2M') }}
     - flags: ['IGNORECASE']

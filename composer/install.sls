@@ -31,6 +31,7 @@ composer-zip-pkgs:
     - pkgs:
       - zip
       - unzip
+      - php-pclzip
 
 composer-mv:
   cmd.run:
@@ -38,7 +39,6 @@ composer-mv:
     - require:
       - pkg: composer-zip-pkgs
       - cmd: composer-setup
-
 
 composer-lock-file:
   file.touch:

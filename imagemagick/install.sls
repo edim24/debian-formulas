@@ -4,7 +4,7 @@ include:
 imagemagick:
   pkg.installed:
     - pkgs:
-      - php7.0-imagick
+      - php7.1-imagick
       - imagemagick
     - require:
       - pkg: php
