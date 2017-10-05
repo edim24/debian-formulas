@@ -10,9 +10,9 @@ tideways-repo:
 tideways:
   pkg.installed:
     - pkgs:
-      - tideways-daemon
       - tideways-php
       - tideways-cli
+      - graphviz
     - require:
       - pkgrepo: tideways-repo
       - pkg: php
