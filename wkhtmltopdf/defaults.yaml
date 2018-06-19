@@ -2,5 +2,5 @@
 # vim: ft=yaml
 
 wkhtmltopdf:
-  path: http://download.gna.org/wkhtmltopdf/0.12/0.12.2.1/
-  deb: wkhtmltox-0.12.2.1_linux-wheezy-amd64.deb
+  path: https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/
+  deb: wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
