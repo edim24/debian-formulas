@@ -26,11 +26,7 @@ supervisor:
       directory: {{ app_dir }}deploy/current/
       {%- endif %}
       command: {{ params['command'] }}
-      {% if environment == 'local' -%}
-      numprocs: {{ params['numprocs']['local'] }}
-      {%- else -%}
-      numprocs: {{ params['numprocs']['prod'] }}
-      {%- endif %}
+      numprocs: {{ params['numprocs'][environment] }}
       logs_dir: {{ supervisor.get('logs_dir') }}
     - template: jinja
     - makedirs: True
