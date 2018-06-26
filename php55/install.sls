@@ -25,7 +25,7 @@ php55-extentions:
 php55-www-conf:
   file.managed:
     - name: /etc/php5/fpm/pool.d/www.conf
-    - source: salt://php55/www.conf
+    - source: {{ php55.www_conf.get(environment) }}
     - user: root
     - group: root
     - require:

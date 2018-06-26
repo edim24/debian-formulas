@@ -4,5 +4,8 @@
 php55:
   upload_max_filesize: 2M
   enable_short_open_tag: False
+  www_conf:
+    local: salt://php55/www.default.conf
+    prod: salt://php55/www.default.conf
   extentions:
     - php5-curl
