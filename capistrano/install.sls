@@ -12,7 +12,7 @@ ruby-gpg:
     - require:
       - pkg: curl
 
-ruby-2.0.0:
+ruby-2.2.6:
   rvm.installed:
     - default: True
     - require:
@@ -21,6 +21,6 @@ ruby-2.0.0:
 capistrano:
   gem.installed:
     - version : {{ capistrano.version }}
-    - ruby: ruby-2.0.0
+    - ruby: ruby-2.2.6
     - require:
-      - rvm: ruby-2.0.0
+      - rvm: ruby-2.2.6
