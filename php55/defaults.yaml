@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
-
+# Environment: prod or local
+environment: local
+# PHP settings
 php55:
   upload_max_filesize: 2M
   enable_short_open_tag: False

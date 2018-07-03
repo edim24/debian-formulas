@@ -4,6 +4,14 @@
 {## Start with defaults from defaults.yaml ##}
 {% import_yaml 'php55/defaults.yaml' as default_settings %}
 
+{## Get environment from pillar ##}
+{% set environment = salt['pillar.get'](
+        'environment',
+        default=default_settings.environment,
+        merge=False
+    )
+%}
+
 {## Merge in php55 pillar ##}
 {% set php55 = salt['pillar.get'](
         'php55',
