@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{## Start with defaults from defaults.yaml ##}
+{% import_yaml 'locales/defaults.yaml' as default_settings %}
+
+{## Get commands list from pillar ##}
+{% set locales = salt['pillar.get'](
+        'locales',
+        default=default_settings.locales,
+        merge=True
+    )
+%}
