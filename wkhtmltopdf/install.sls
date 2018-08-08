@@ -8,7 +8,7 @@ wkhtmltopdf-src-clear:
 
 wkhtmltopdf-src:
   cmd.run:
-    - name: wget http://download.gna.org/wkhtmltopdf/0.12/{{ wkhtmltopdf.version }}/wkhtmltox-{{ wkhtmltopdf.version }}_linux-generic-amd64.tar.xz
+    - name: wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/{{ wkhtmltopdf.version }}/wkhtmltox-{{ wkhtmltopdf.version }}_linux-generic-amd64.tar.xz
     - creates: /usr/src/wkhtmltox-{{ wkhtmltopdf.version }}_linux-generic-amd64.tar.xz
     - cwd: /usr/src
     - require:
