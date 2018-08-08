@@ -1,0 +1,9 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+
+# System locale must be present in all list
+locales:
+  all:
+    - en_US.UTF-8
+    - ru_RU.UTF-8
+  system: en_US.UTF-8
