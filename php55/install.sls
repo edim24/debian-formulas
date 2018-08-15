@@ -1,4 +1,5 @@
 {% from "php55/map.jinja" import php55 with context %}
+{% from "php5x/map.jinja" import environment with context %}
 
 php55-dotdeb:
   pkgrepo.managed:
