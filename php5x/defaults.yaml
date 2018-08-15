@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
-
+# Environment: prod or local
+environment: local
+# PHP settings
 php5x:
   upload_max_filesize: 2M
   enable_short_open_tag: False
   php_pkgrepo: deb http://packages.dotdeb.org wheezy-php55 all
+  www_conf:
+    local: salt://php5x/www.default.conf
+    prod: salt://php5x/www.default.conf
   extentions:
     - php5-curl

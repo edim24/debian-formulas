@@ -25,7 +25,7 @@ php5x-extentions:
 php5x-www-conf:
   file.managed:
     - name: /etc/php5/fpm/pool.d/www.conf
-    - source: salt://php5x/www.conf
+    - source: {{ php5x.www_conf.get(environment) }}
     - user: root
     - group: root
     - require:
