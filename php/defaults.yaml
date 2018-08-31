@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
-
+# Environment: prod or local
+environment: local
+# PHP settings
 php:
   upload_max_filesize: 2M
   enable_short_open_tag: False
+  www_conf:
+    local: salt://php/www.default.conf
+    prod: salt://php/www.default.conf
   extentions:
     - php7.0-curl

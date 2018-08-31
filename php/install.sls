@@ -1,4 +1,5 @@
 {% from "php/map.jinja" import php with context %}
+{% from "php/map.jinja" import environment with context %}
 
 php-dotdeb:
   pkgrepo.managed:
@@ -26,7 +27,7 @@ php-extentions:
 php-www-conf:
   file.managed:
     - name: /etc/php/7.0/fpm/pool.d/www.conf
-    - source: salt://php/www.conf
+    - source: {{ php.www_conf.get(environment) }}
     - user: root
     - group: root
     - require:
