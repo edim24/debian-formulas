@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{## Start with defaults from defaults.yaml ##}
+{% import_yaml 'nginx/defaults.yaml' as default_settings %}
+
+{## Merge in nginx pillar ##}
+{% set nginx = salt['pillar.get'](
+        'nginx',
+        default=default_settings.nginx,
+        merge=True
+    )
+%}
