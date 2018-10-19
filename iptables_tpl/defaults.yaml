@@ -1,0 +1,6 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+
+iptables_tpl:
+  rules_v4_path: salt://iptables_tpl/rules.v4
+  rules_v6_path: salt://iptables_tpl/rules.v6

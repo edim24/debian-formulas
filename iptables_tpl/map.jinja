@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{## Start with defaults from defaults.yaml ##}
+{% import_yaml 'iptables_tpl/defaults.yaml' as default_settings %}
+
+{## Get iptables_tpl settings from pillar ##}
+{% set iptables_tpl = salt['pillar.get'](
+        'iptables_tpl',
+        default=default_settings.iptables_tpl,
+        merge=True
+    )
+%}
