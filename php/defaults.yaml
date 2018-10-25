@@ -9,5 +9,6 @@ php:
   www_conf:
     local: salt://php/www.default.conf
     prod: salt://php/www.default.conf
+    test: salt://php/www.default.conf
   extentions:
     - php7.0-curl
