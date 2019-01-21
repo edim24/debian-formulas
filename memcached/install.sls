@@ -19,6 +19,7 @@ memcached-service:
     - source: salt://memcached/memcached.conf
     - context:
       listen_addr: {{ memcached.server.listen_addr }}
+      max_object_size: {{ memcached.server.max_object_size }}
     - template: jinja
     - user: root
     - group: root
