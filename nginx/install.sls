@@ -1,3 +1,5 @@
+{% from "nginx/map.jinja" import nginx with context %}
+
 include:
   - php
 
@@ -13,7 +15,7 @@ nginx:
 
 /etc/nginx/nginx.conf:
   file.managed:
-    - source: salt://nginx/nginx.conf
+    - source: {{ nginx.config }}
     - user: root
     - group: root
     - require:
