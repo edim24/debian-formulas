@@ -2,4 +2,3 @@
 # vim: ft=yaml
 nginx:
   config: salt://nginx/nginx.conf
-  
