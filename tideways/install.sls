@@ -10,8 +10,7 @@ tideways-repo:
 tideways:
   pkg.installed:
     - pkgs:
-      - tideways-daemon
-      - tideways-php
+      - tideways-php: 4.1.6
       - tideways-cli
       - graphviz
     - require:
