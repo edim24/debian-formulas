@@ -17,7 +17,7 @@ supervisor:
 {% for worker, params in supervisor.get('workers', {}).items() %}
 /etc/supervisor/conf.d/{{ worker }}.conf:
   file.managed:
-    - source: salt://supervisor/worker.conf
+    - source: {{ supervisor.get('worker_template') }}
     - context:
       program: {{ worker }}
       {% if environment == 'local' -%}

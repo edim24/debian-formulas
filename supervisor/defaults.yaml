@@ -7,6 +7,7 @@ environment: local
 app_dir: /vagrant/
 # Supervisor settings
 supervisor:
+  worker_template: salt://supervisor/worker.conf
   logs_dir: /var/log/supervisor/
   workers: {}
 #    example_worker:
